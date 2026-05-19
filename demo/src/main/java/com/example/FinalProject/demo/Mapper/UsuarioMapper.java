@@ -7,10 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UsuarioMapper {
-    public Usuario toEntity(RegistroRequest request, PasswordEncoder encoder){
+    public Usuario toEntity(RegistroRequest request, PasswordEncoder encoder) {
         return Usuario.builder()
                 .email(request.getEmail())
                 .contrasenaHash(encoder.encode(request.getContrasena()))
+                .monedaPreferida("COP")
+                .monedaBase("COP")
+                .activo(true)
                 .build();
     }
 }
