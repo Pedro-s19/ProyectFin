@@ -32,6 +32,9 @@ public class Usuario {
     @Column(nullable = false)
     private String monedaBase = "COP";
 
+    @Column(nullable = false)
+    private String rol ="ROLE_ADMIN";
+
     private LocalDateTime fechaCreacion;
 
     private boolean activo = true;

@@ -49,7 +49,9 @@ public class UsuarioServiceImp implements UsuarioService {
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getContrasena())
         );
         String token = tokenProvider.generarToken(authentication);
-        return new JwtResponse(token, "Bearer", request.getEmail());
+        Usuario usuario = usuarioRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+        return new JwtResponse(token, "Bearer", request.getEmail(), usuario.getRol());
     }
 
     @Override
