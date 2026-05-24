@@ -32,7 +32,7 @@ public class Usuario {
     @Column(nullable = false)
     private String monedaBase = "COP";
 
-    @Column(nullable = false)
+    @Column(name = "rol", nullable = false, columnDefinition = "varchar(255) default 'ROLE_ADMIN'")
     private String rol ="ROLE_ADMIN";
 
     private LocalDateTime fechaCreacion;
