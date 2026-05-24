@@ -18,4 +18,5 @@ public interface UsuarioService {
     List<UsuarioResponse> listarUsuarios();
     UsuarioResponse actualizarUsuario(UUID id, ActualizarUsuarioRequest request);
     void eliminarUsuario(UUID id);
+    void eliminarUsuarioPermanente(UUID id);
 }

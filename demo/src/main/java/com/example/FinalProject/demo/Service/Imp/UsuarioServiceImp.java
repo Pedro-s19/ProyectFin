@@ -95,6 +95,12 @@ public class UsuarioServiceImp implements UsuarioService {
         usuario.setActivo(false);
         usuarioRepository.save(usuario);
     }
+    @Override
+    public void eliminarUsuarioPermanente(UUID id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+        usuarioRepository.delete(usuario);
+    }
 
     private UsuarioResponse toResponse(Usuario usuario) {
         return UsuarioResponse.builder()
