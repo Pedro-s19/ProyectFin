@@ -37,7 +37,7 @@ public class AdminController {
         if(admin.getId().equals(id)){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        usuarioService.eliminarUsuarioPermanente(id);
+        usuarioService.eliminarUsuario(id);
         return ResponseEntity.noContent().build();
     }
 }

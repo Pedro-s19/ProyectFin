@@ -13,6 +13,7 @@ public class UsuarioMapper {
                 .contrasenaHash(encoder.encode(request.getContrasena()))
                 .monedaPreferida("COP")
                 .monedaBase("COP")
+                .rol("ROLE_USER")
                 .activo(true)
                 .build();
     }
