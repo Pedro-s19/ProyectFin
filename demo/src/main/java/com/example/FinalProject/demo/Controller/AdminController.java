@@ -24,7 +24,7 @@ public class AdminController {
         this.securityUtils = securityUtils;
     }
 
-    @GetMapping("/usuarios/{id}")
+    @GetMapping("/usuarios")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UsuarioResponse>> listarUsuarios(){
         return ResponseEntity.ok(usuarioService.listarUsuarios());
