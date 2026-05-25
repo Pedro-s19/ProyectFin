@@ -9,6 +9,9 @@ import com.example.FinalProject.demo.Service.ReporteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/reportes")
 public class ReporteController {
@@ -19,6 +22,15 @@ public class ReporteController {
     public ReporteController(ReporteService reporteService, SecurityUtils securityUtils) {
         this.reporteService = reporteService;
         this.securityUtils = securityUtils;
+    }
+
+    @GetMapping("/gastos-diarios")
+    public ResponseEntity<Map<LocalDate, Double>> gastosDiarios(
+            @RequestParam int anio,
+            @RequestParam int mes,
+            @RequestParam(defaultValue = "COP") String moneda) {
+        Usuario usuario = securityUtils.obtenerUsuarioActual();
+        return ResponseEntity.ok(reporteService.obtenerGastosDiarios(usuario, anio, mes, moneda));
     }
 
     @GetMapping("/tendencia")

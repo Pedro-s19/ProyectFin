@@ -50,6 +50,22 @@ public class ReporteServiceImp implements ReporteService {
     }
 
     @Override
+    public Map<LocalDate, Double> obtenerGastosDiarios(Usuario usuario, int anio, int mes, String monedaDestino) {
+        LocalDate inicio = LocalDate.of(anio, mes, 1);
+        LocalDate fin = inicio.withDayOfMonth(inicio.lengthOfMonth());
+        List<Gasto> gastos = gastoRepository.findByUsuarioAndFechaBetween(usuario, inicio, fin);
+        Map<LocalDate, Double> mapa = new HashMap<>();
+        for (Gasto g : gastos) {
+            mapa.merge(g.getFecha(), g.getMonto(), Double::sum);
+        }
+        Map<LocalDate, Double> resultado = new HashMap<>();
+        for (Map.Entry<LocalDate, Double> entry : mapa.entrySet()) {
+            resultado.put(entry.getKey(), currencyConverter.convertir(entry.getValue(), monedaDestino));
+        }
+        return resultado;
+    }
+
+    @Override
     public DistribucionPorCategoriaResponse obtenerDistribucionPorCategoria(Usuario usuario, int anio, int mes, String monedaDestino) {
         LocalDate inicio = LocalDate.of(anio, mes, 1);
         LocalDate fin = inicio.withDayOfMonth(inicio.lengthOfMonth());
